@@ -1,9 +1,17 @@
 <h1>Hello, I am Sam 9000.</h1>
-<h2>A fortune teller and a business consultant (yes, same thing.)</h2>
+<h2>A fortune teller and a business consultant</h2>
 <p>
 	I can do two things for you:
 </p>
-<ul>
-	<li><%= link_to 'Fortune Telling', new_query_path %></li>
-	<li><%= link_to 'Business Consulting', new_query_path %></li>
-</ul>
+<br>
+<div id='initiate'>
+	<ul>
+		<li><%= link_to 'Fortune Telling', new_query_path %></li>
+		<li><%= link_to 'Business Consulting', new_query_path %></li>
+		<script>
+			$('#initiate li').css('font-size','3em').css('height', '70px');
+		
+		</script>
+	</ul>
+	<p>(yes, same thing.)</p>
+</div>
