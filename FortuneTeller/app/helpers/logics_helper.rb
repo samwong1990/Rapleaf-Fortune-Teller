@@ -1,0 +1,2 @@
+module LogicsHelper
+end

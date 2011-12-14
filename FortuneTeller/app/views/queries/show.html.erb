@@ -1,0 +1,24 @@
+<!-- <p id="notice"><%= notice %></p> -->
+<p>
+	Hello <b><%= @query.name %></b>. I hope you enjoy using <%= @query.email.split('@').last.split('.').first%>. With your permission, I will start looking at your friends through my crystal ball. They are:
+</p>
+<!-- <p>
+  <b>Email:</b>
+  <%= @query.email %>
+</p>
+
+<p>
+  <b>Dataset:</b>
+  <%= @query.dataset %>
+</p> -->
+<ul>
+	<% @query.dataset.each_line do |x| %>
+	    <li><%= x %></li>
+	<% end %>
+</ul>
+
+<%= button_to 'Please go ahead Sam.', logics_path(query_id:@query) %>
+
+<%= link_to "About", logics_about_path%>
+<%= link_to 'Edit', edit_query_path(@query) %> |
+<%= link_to 'Back', queries_path %>
