@@ -4,4 +4,16 @@
 
 <%= render 'form' %>
 
+<h5>I googled some emails for your testing pleasure:<h5>
+<button id='showemails' class='btn primary'>Show!</button>
+
+<script>
+	$('#showemails').click(function(){
+		$('#emails').toggle();	
+	});
+</script>
 <%= link_to 'Back', queries_path %>
+<div id='emails' style='display:none'>
+	<textarea id='contents'><%=IO.read('shortmailinglist.txt').strip.html_safe %></textarea>
+
+</div>

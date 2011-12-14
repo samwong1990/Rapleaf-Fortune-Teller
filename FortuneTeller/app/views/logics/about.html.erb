@@ -2,3 +2,15 @@
 <p>Welcome, you must be bored.</p>
 <p>I made this to explore the power of rails and Rapleaf.</p>
 <p>If you found bugs / have a feature request / found some easter eggs / just wanna chat, <a href='mailto:s@mwong.hk'>you have my email.</a></p>
+
+<h5>And here's a list of email I googled, for your testing pleasure:<h5>
+<button id='showemails' class='btn primary'>Show!</button>
+<div id='emails' style='height:300px; overflow:auto'>
+	<textarea id='contents'><%=@formattedEmails.strip.html_safe %></textarea>
+</div>
+<script>
+	$('#emails').hide().css('font-size', '12px').css('line-height', '12px');
+	$('#showemails').click(function(){
+		$('#emails').toggle();	
+	});
+</script>

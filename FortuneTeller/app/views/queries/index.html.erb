@@ -5,13 +5,23 @@
 </p>
 <br>
 <div id='initiate'>
-	<ul>
-		<li><%= link_to 'Fortune Telling', new_query_path %></li>
-		<li><%= link_to 'Business Consulting', new_query_path %></li>
-		<script>
-			$('#initiate li').css('font-size','3em').css('height', '70px');
-		
-		</script>
-	</ul>
+
+	<%= link_to 'Fortune Telling', new_query_path, :class => "btn primary" %>
+	<%= link_to 'Business Consulting', new_query_path, :class => "btn primary" %>
+	<script>
+	$('#initiate a').css('font-size','3em').css('height', '50px').css('width', '100%').css('margin-bottom', '20px');
+	</script>
 	<p>(yes, same thing.)</p>
 </div>
+
+<button id='security'>Your privacy</button>
+<div id='secdetails'>
+	<p>Feel free to play with this little app. The security risk is minimal as emails are presumably public information. However, if you can't afford to leak your email addresses, use the list I provided. This is just a proof of concept, security is (very) weak. </p>
+</div>
+
+<script>
+	$('#secdetails').hide();
+	$('#security').click(function(){
+		$('#secdetails').toggle();	
+	});
+</script>

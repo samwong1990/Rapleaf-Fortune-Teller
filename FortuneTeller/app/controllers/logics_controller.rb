@@ -90,31 +90,32 @@ class LogicsController < ApplicationController
         
         friendsLines = Array.new
         niche = Array.new
-        unless tops['gender'].nil?
-            friendsLines << "You prefer the accompany of " + tops['gender'] + 's'
-            niche << tops['gender'].downcase + 's'
-        end
-        unless tops['age'].nil?
-            case tops['age'][0]
-            when '1'
-                age = 'twenties'
-            when '2'
-                age = 'thirties'
-            when '3'
-                age = 'forties'
-            when '4'
-                age = 'fifties'
-            when '5'
-                age = 'sixties'
-            when '6'
-                age = 'seventies'
-            else
-                age = 'adulthood'
+        unless tops.nil?
+            unless tops['gender'].nil?
+                friendsLines << "You prefer the accompany of " + tops['gender'] + 's'
+                niche << tops['gender'].downcase + 's'
             end
-            friendsLines << "Your friends are approaching their " + age
-            niche << " in their " + age
-        end
-                                
+            unless tops['age'].nil?
+                case tops['age'][0]
+                when '1'
+                    age = 'twenties'
+                when '2'
+                    age = 'thirties'
+                when '3'
+                    age = 'forties'
+                when '4'
+                    age = 'fifties'
+                when '5'
+                    age = 'sixties'
+                when '6'
+                    age = 'seventies'
+                else
+                    age = 'adulthood'
+                end
+                friendsLines << "Your friends are approaching their " + age
+                niche << " in their " + age
+            end
+        end                 
         # Merge all the predictions
         lines |= friendsLines
         lines = lines.shuffle
@@ -124,7 +125,7 @@ class LogicsController < ApplicationController
             @niche = "Your niche is " + niche.join(" ") + "."
         end
         # Creep them out by available fields
-        if available.length > 0
+        unless available.nil? || available.length <= 0
             lines << "I also have a faint feeling about your friends' " + available.to_sentence + ". But I am too weak to see them at the moment"
         end
         @lines = lines.join(". ") + "."
@@ -135,9 +136,11 @@ class LogicsController < ApplicationController
     end
 
     def about
-        @line = 'blahblahblah'
-        # @queries.each do |query|
-        #     line += query.inspect
+        path_to_emails = 'shortmailinglist.txt'
+        @formattedEmails = IO.read(path_to_emails)
+        # @formattedEmails = ''
+        # emails.each_line do |value|
+        #     @formattedEmails += value.strip + "<br>\n"
         # end
     end
        
