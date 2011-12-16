@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Session:</b>
+  <%= @consulting.session %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @consulting.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @consulting.email %>
+</p>
+
+<p>
+  <b>Dataset:</b>
+  <%= @consulting.dataset %>
+</p>
+
+<p>
+  <b>Hasheddataset:</b>
+  <%= @consulting.hasheddataset %>
+</p>
+
+
+<%= link_to 'Edit', edit_consulting_path(@consulting) %> |
+<%= link_to 'Back', consultings_path %>

@@ -1,13 +1,21 @@
 class LogicsController < ApplicationController
     def index
+        @errormessages = Array.new
         @query = query = Query.find(params[:query_id])
+        path_to_apikey = "APIKEY"
+        apikey = IO.read(path_to_apikey).strip
         begin
-            path_to_apikey = "APIKEY"
-            apikey = IO.read(path_to_apikey).strip
             api = RapleafApi::Api.new(apikey) # Set API key here
-            hash = api.query_by_email(query.email)
+            # hash = api.query_by_email(query.email)
+            hash = api.query_by_sha1(Digest::SHA1.hexdigest(query.email))
+            # @errormessages << Digest::SHA1.hexdigest(query.email)
+            @errormessages << hash.inspect
             # hash = api.query_by_email('ab@cd.com')
-            @facts = hash.inspect
+            @facts = hash
+        rescue Exception => e
+            @errormessages << "Can't see you through the crystal ball..." + e.message + ". You used '" + query.email + "' as your email."
+        end
+        begin       
             # @bulk = bulk = api.bulk_query(query.dataset.each_line, show_available = true)
             @set = set = Array.new
             query.dataset.each_line{|x| set << {'email' => x.strip}}
@@ -16,9 +24,8 @@ class LogicsController < ApplicationController
             end_time = Time.now
             @timelapse = end_time - beginning_time
         rescue Exception => e
-            puts e.message
-            @errormessage = Dir.getwd + e.message
-        end       
+            @errormessages << "Can't find your friends through the crystal ball..." + e.message
+        end
         #First a prediction for the user:
         stock = "You have a great need for other people to like and admire you. You have a tendency to be critical of yourself. You have a great deal of unused capacity which you have not turned to your advantage. While you have some personality weaknesses, you are generally able to compensate for them. Disciplined and self-controlled outside, you tend to be worrisome and insecure inside. At times you have serious doubts as to whether you have made the right decision or done the right thing. You prefer a certain amount of change and variety and become dissatisfied when hemmed in by restrictions and limitations. You pride yourself as an independent thinker and do not accept others' statements without satisfactory proof. You have found it unwise to be too frank in revealing yourself to others. At times you are extroverted, affable, sociable, while at other times you are introverted, wary, reserved. Some of your aspirations tend to be pretty unrealistic. Security is one of your major goals in life."
         stock = stock.split(".")
@@ -28,24 +35,23 @@ class LogicsController < ApplicationController
             hash.each do|field, value|
                 case field
                 when "age"
-                    if  value < 12
-                        age_group = "a kid"
-                    elseif  value < 18
-                        age_group = "a teen"
-                    elseif  value < 25
-                        if hash.has_key("gender")
-                            if hash["gender"].casecmp("female") == 0
-                                age_group = "a young lady"
-                            else
-                                age_group = "a young man"
-                            end
-                        else
-                            age_group = "still young"
-                        end
+                    case value[0]
+                    when '1'
+                        age = 'twenties'
+                    when '2'
+                        age = 'thirties'
+                    when '3'
+                        age = 'forties'
+                    when '4'
+                        age = 'fifties'
+                    when '5'
+                        age = 'sixties'
+                    when '6'
+                        age = 'seventies'
                     else
-                        age_group = "a grown up"
+                        age = 'adulthood'
                     end
-                    line << "People say you are " + age_group + "."
+                    line << "You are approaching your " + age
                 when "gender"
                     if  value.casecmp("female") == 0
                         line << "You are a nice lady"

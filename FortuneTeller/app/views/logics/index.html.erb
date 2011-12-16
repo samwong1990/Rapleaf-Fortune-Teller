@@ -15,7 +15,12 @@
 
 <button id='showautopsy'>Autopsy</button>
 <div id='autopsy' style='display:none'>
-	<%=@errormessage%>
+	<%if @errormessages.length > 0%>
+		<div class="alert-message warning">
+		  <a class="close" href="#">×</a>
+		  <p><%=@errormessages.to_sentence.html_safe%></p>
+		</div>
+	<%end%>
 	<h2>timelapsed for the bulk query</h2>
 	<%=@timelapse.inspect%>
 	<!-- <h2>seed</h2>

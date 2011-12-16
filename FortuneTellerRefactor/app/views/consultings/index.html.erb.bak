@@ -1,0 +1,31 @@
+<h1>Listing consultings</h1>
+
+<table>
+  <tr>
+    <th>Session</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Dataset</th>
+    <th>Hasheddataset</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @consultings.each do |consulting| %>
+  <tr>
+    <td><%= consulting.session %></td>
+    <td><%= consulting.name %></td>
+    <td><%= consulting.email %></td>
+    <td><%= consulting.dataset %></td>
+    <td><%= consulting.hasheddataset %></td>
+    <td><%= link_to 'Show', consulting %></td>
+    <td><%= link_to 'Edit', edit_consulting_path(consulting) %></td>
+    <td><%= link_to 'Destroy', consulting, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Consulting', new_consulting_path %>

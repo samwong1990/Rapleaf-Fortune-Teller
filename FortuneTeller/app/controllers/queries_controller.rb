@@ -81,4 +81,13 @@ class QueriesController < ApplicationController
     end
   end
   
+  def consulting
+      @query = Query.new
+
+      respond_to do |format|
+        format.html # consulting.html.erb
+        format.json { render json: @query }
+      end
+  end
+  
 end

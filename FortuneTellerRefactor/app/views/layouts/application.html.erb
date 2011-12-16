@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sam 9000, your electronic Consultant and Fortune Teller (β)</title>
+	<%= stylesheet_link_tag    "application" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="topbar">
+		<div class="fill">
+			<div class="container">
+				<a class="brand" href="/consultings/">S9000, Your electronic Consultant and Fortune Teller (β)</a>
+				<!-- <a>session id = <%=session['session_id']%></a> -->
+				<ul class="nav">
+					<li><%= link_to "About", about_consulting_path%></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<!-- Main hero unit for a primary marketing message or call to action -->
+		<div class="hero-unit">
+			<%= yield %>
+		</div> <!-- /container -->
+		<footer>
+			<p>&copy; Sam Wong 2011</p>
+		</footer>
+	</div>
+</body>
+</html>
+

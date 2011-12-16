@@ -1,0 +1,19 @@
+<!-- <p id="notice"><%= notice %></p> -->
+<p>
+	Hello <b><%= @consulting.name %></b>. With your permission, I will start looking at your customers (<%=number_to_human @consulting.dataset.lines.count%> of them) through my crystal ball.
+</p>
+<h5>Takes half a min for the test case (with 10,000 emails)</h5>
+<p>
+	They are:
+</p>
+<%= button_to "Please go ahead Sam", result_consulting_path(@consulting), :class => 'btn primary'%>
+<ul>
+	<% @consulting.dataset.each_line do |x| %>
+	    <li><%= x %></li>
+	<% end %>
+</ul>
+<%= button_to "Please go ahead Sam", result_consulting_path(@consulting), :class => 'btn primary'%>
+
+<h5>Takes half a min for the test case (with 10,000 emails)</h5>
+<%= link_to 'Edit', edit_consulting_path(@consulting) %> |
+<%= link_to 'Back', consultings_path %>

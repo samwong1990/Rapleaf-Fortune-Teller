@@ -1,0 +1,36 @@
+<h2>Let me validate your niche.</h2>
+
+<%= render 'form' %>
+<button id='showemail' class='btn'>I googled some emails for your testing pleasure:</button>
+<button id='show5k' class='emails btn info' style='display:none'>5,000 emails</button>
+<button id='show10k' class='emails btn' style='display:none'>10,000 emails</button>
+
+
+<script>
+	$('#showemail').click(function(){
+		$(this).hide();
+		$('.emails').show();
+	});
+	$('#show5k').click(function(){
+		$('#5k').toggle();
+		$('#10k').toggle();
+		$('#show5k').addClass('info');
+		$('#show10k').removeClass('info');	
+	});
+	$('#show10k').click(function(){
+		$('#10k').toggle();
+		$('#5k').toggle();
+		$('#show5k').removeClass('info');
+		$('#show10k').addClass('info');
+		
+	});
+	$('.field_with_errors').css('display','inline')
+</script>
+<%= link_to 'Back', consultings_path %>
+<div class='emails' style='display:none;'>
+	<textarea id='5k' style='width:350px;'><%=IO.read('shortermailinglist.txt').strip.html_safe %></textarea>
+	<textarea id='10k' style='display:none; width:350px;'><%=IO.read('shortmailinglist.txt').strip.html_safe %></textarea>
+</div>
+<%= link_to 'Back', consultings_path %>
+
+

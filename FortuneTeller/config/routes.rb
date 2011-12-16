@@ -10,6 +10,7 @@ FortuneTeller::Application.routes.draw do
   # Route for start action
   match 'logics' => 'logics#index'
   root :to => 'queries#index'
+  match 'consulting' => 'queries#consulting'
   
   # map.connect '/logics', :controller => 'logics', :action => 'create'
   

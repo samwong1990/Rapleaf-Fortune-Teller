@@ -1,0 +1,29 @@
+<%= form_for(@consulting) do |f| %>
+  <% if @consulting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@consulting.errors.count, "error") %> prohibited this consulting from being saved:</h2>
+
+      <ul>
+      <% @consulting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :dataset %>
+    <%= f.text_area :dataset , :rows => 6%>
+  </div>
+  <div class="actions" style='border-top: 0px; border-bottom: 1px solid #DDD'>
+    <%= f.submit 'Gimme the info!', :class => 'btn primary'%>
+  </div>
+<% end %>
