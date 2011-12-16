@@ -2,11 +2,10 @@ FortuneTellerRefactor::Application.routes.draw do
     
   root :to => 'consultings#index'
     
-    
   match "/fortune_tellers/:id/result"    =>  "fortune_tellers#result", :via => [:get, :post], :as => "result_fortune_teller"
   resources :fortune_tellers
 
-  match "/consultings/about"    =>  "consultings#about", :via => [:get, :post], :as => "about_consulting"
+  match "/about"    =>  "consultings#about", :via => [:get, :post], :as => "about_consulting"
   match "/consultings/:id/result"    =>  "consultings#result", :via => [:get, :post], :as => "result_consulting"
   resources :consultings
 
