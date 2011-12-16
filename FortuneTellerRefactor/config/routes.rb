@@ -1,4 +1,8 @@
 FortuneTellerRefactor::Application.routes.draw do
+    
+  root :to => 'consultings#index'
+    
+    
   match "/fortune_tellers/:id/result"    =>  "fortune_tellers#result", :via => [:get, :post], :as => "result_fortune_teller"
   resources :fortune_tellers
 
