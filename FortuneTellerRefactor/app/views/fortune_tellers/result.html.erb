@@ -17,6 +17,8 @@
 		  <%= button_to "Retry", result_consulting_path(@consulting), :class => 'btn'%>
 		</div>
 	<%end%>
+	<h2>About you</h2>
+	<%=@facts.inspect%>
 	<h2>timelapsed for the bulk query</h2>
 	<%=@timelapse.inspect%>
 	<!-- <h2>seed</h2>

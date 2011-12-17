@@ -14,10 +14,13 @@ class FortuneTellersController < ApplicationController
     # GET /fortune_tellers/1.json
     def show
         @fortune_teller = FortuneTeller.find_last_by_session(session[:session_id])
-
-        respond_to do |format|
-            format.html # show.html.erb
-            format.json { render json: @fortune_teller }
+         if @fortune_teller.dataset.strip == ''
+                redirect_to result_fortune_teller_path
+        else
+            respond_to do |format|
+                format.html # show.html.erb
+                format.json { render json: @fortune_teller }
+            end
         end
     end
 
