@@ -154,20 +154,21 @@ class FortuneTellersController < ApplicationController
         lines |= stock
         
         # Get intelligence, retry 3 times to counteract random error
-        for i in (1..3)
-            begin               
-                set = Array.new
-                @FortuneTeller.dataset.each_line{|x| set << {'email' => x.strip}}
-                beginning_time = Time.now
-                @bulk = api.bulk_query(set, show_available = true)
-                end_time = Time.now
-                @timelapse = end_time - beginning_time
-                break
-            rescue Exception => e
-                @errormessages << "Can't see your friends through the crystal ball in the " + count_in_english[i] + " time..." + e.message
+        unless @FortuneTeller.dataset.strip == ''   #Don't query if it is empty
+            for i in (1..3)
+                begin               
+                    set = Array.new
+                    @FortuneTeller.dataset.each_line{|x| set << {'email' => x.strip}}
+                    beginning_time = Time.now
+                    @bulk = api.bulk_query(set, show_available = true)
+                    end_time = Time.now
+                    @timelapse = end_time - beginning_time
+                    break
+                rescue Exception => e
+                    @errormessages << "Can't see your friends through the crystal ball in the " + count_in_english[i] + " time..." + e.message
+                end
             end
         end
-        
         # Process intelligence
         unless @bulk.nil? || @bulk.length == 0
             # Count the top
